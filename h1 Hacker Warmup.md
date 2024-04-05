@@ -29,7 +29,7 @@ Pelit tiedot saa osoitteesta: https://overthewire.org/wargames/bandit/
    
    ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/92f97182-6322-4cc6-9410-c226be8d65a3)
    
-   **Pelin sääntöjä kunnioittaen, en julkaise tasojen ratkaisuja, vaan pelkät lopputulokset:**
+   **!!Pelin sääntöjä kunnioittaen, en julkaise tasojen ratkaisuja, vaan pelkät lopputulokset!!:**
 
    ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/1aaa58c3-3b9c-45c6-aefb-8b9060c9a4de)
 
@@ -45,5 +45,78 @@ Tässä tehtävässä käytännössä sama periaate kuin edellisessä, mutta tie
 
 
 ## WebGoatin asennus, sekä "HTTP Basics" ja "Developer Tools" tehtävät
+
+### Asennetaan Kali:lle WebGoat 8:
+
+1. Käytin T.Karvisen tekemää ohjeistusta tähän : https://terokarvinen.com/2020/install-webgoat-web-pentest-practice-target/
+2. Ensin asennetaan ufw (Jätin Javan, wget ja bash-completion asennukset pois, koska ne oli jo esiasennettuna Kaliin.)
+   Näitä tarkistin komennolla **apt list --installed | grep 'paketin nimi'**
+
+   ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8bd7f2cd-7aba-4ea5-b44b-05ba27aab861)
+
+4. Kytketään ufw päälle:
+
+   ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/94975dd4-80d7-4a43-8bd3-54eb98d4f3de)
+
+5.	Ladataan ja asennetaan WebGoat 8:
+
+   ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/cbf77b3d-dca4-40ec-81c9-c1cc7f404333)
+
+ ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/25322dbc-29fc-4be7-aec3-630d47d15ed0)
+
+Kun konsoliin tulee alla oleva ilmoitus, jätetään konsoli auki taustalle:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/9716de6d-66e3-4fe5-9cc7-894dd7a8d9d3)
+
+Avataan selain (Firefox) ja mennään osoitteeseen **http://localhost:8080/WebGoat**
+
+Rekisteröidään uusi käyttäjä:
+- usr: hacker1
+- pw : hacker1
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/90ac4153-e1c2-4793-8c0e-7238b23aad94)
+
+### HTTP Basics
+
+Kun WebGoat rekisteröinti on tehty, siirrtyään General -> HTTP Basics välilehteen
+
+Tässä osiossa palvelin ottaa vastaan syötetyn tekstin (post) ja kääntää sen takaperin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3e98cfb1-f800-4ff6-a9c7-ce533816e355)
+
+Avaamalla selaimen 'Network' osion (F12 -> Network) nähdään pyynnön sisältö:
+
+'attack1' sisälsi POST tiedot kirjoittaessani nimeni kenttään.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/600a5dd6-c595-4634-9487-6e6b61107067)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/92d9cbc4-d3c2-49c3-897f-2a4ba47ac277)
+
+Seuraavassa osiossa kysytään aikaisemman HTTP:n tietotyyppiä ja 'Magic Number' tietoa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/f61ffba3-dcd8-4f78-9bc9-b62c1e64707e)
+
+Tässä jouduin avuksi etsimään tietoa netistä, koska en löytänyt 'attack1' osiosta maagista numeroa.
+
+Löysin JD Wilson:in pitämästä WordPress blogista vastauksen: https://thejdwilson.wordpress.com/2020/11/24/webgoat-http-basics/
+
+Maaginen numero oli ilmeisesti 'attack2' POST tiedossa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/fc877e57-f349-4512-a8ed-203f72e8a345)
+
+'Ylläolevasta kuvasta näkyy, että Magic Number oli 23, jonka syötin kenttään ja sain oikean vastauksen.
+
+
+
+
+
+
+
+ 
+
+   
+
+   
+
 
 ## PortSwigger Labs: SQL injections
