@@ -106,6 +106,31 @@ Maaginen numero oli ilmeisesti 'attack2' POST tiedossa:
 
 'Ylläolevasta kuvasta näkyy, että Magic Number oli 23, jonka syötin kenttään ja sain oikean vastauksen.
 
+### Developer Tools
+
+Siiryn seuraavaksi Developer Tools osioon.
+
+Osiossa käydään läpi selainten (Chrome, Firefox, Edge yms.) kehitystyökalut ja mitä niillä voi tehdä, mitkä ovat itselleni jo jonkin verran tuttuja, joten siirryn suoraan harjoitusosioihin:
+
+Siirryin alla olevaan osioon:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b19fa0d0-1f5c-4b5e-a32d-982c78856657)
+
+Avasin konsolin ja kutsuin ylläolevaa js funktiota ja sain vastauksen numerosarjan **-413522746**:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/641dcacf-2ce8-4c6b-adec-be4cc9453c44)
+
+Seuraavassa harjoituksessa etsin HTTP pyynnöstä numerosarjaa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8e23dc4a-36dc-48da-834f-2956949fa64f)
+
+
+
+
+
+
+
+
 
 
 
