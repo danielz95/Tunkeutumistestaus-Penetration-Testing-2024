@@ -1,8 +1,32 @@
 # h1 Hacker Warmup
 Tässä tehtävässä lämmitellään Tero Karvisen pitämää tunkeutumistestauskurssia varten tekemällä tunkeutumiseen liittyvät harjoitukset.
 
-## Lue ja tiivistä
-Tässä katsoin läpi videosarjaa 'The Art of Hacking (Video Collection)'
+## Lue/katso ja tiivistä
+Tässä katsoin läpi videosarjaa 'The Art of Hacking (Video Collection):Lesson 4'
+
+- Aktiivisessa tiedustelussa käytetään erinäisiä työkaluja ja menetelmiä etsiäkseen haavoittuvuuksia hyökättävän kohteen suojauksessa, kuten porttiskannaukset ja haavoittuvuus-skannaukset
+- Metodologiassa edetään järjestyksessä Port scanning, Web Service Review ja lopuksi vasta Vulnerability scanning.
+- Yleisin virhe on hypätä suoraan Vuln. scanningiin ja ohittaa edelliset vaiheet.
+- Porttiskannaustyökalut:
+     * Nmap, suosituin ja monipuolisin porttiskanneri
+     * Masscan, nopein porttiskanneri
+     * Udpprotoscanner, nopea UDP porttiskaneri
+- Webbisivu skannaustyökalut:
+     * EyeWitness, taltioi ja ottaa kuvankaappauksia Web-sivuista, portit 80 ja 443
+- Verkkohaavoittuvuusskannerit:
+     * OpenVAS, ilmainen
+     * Nessus, maksaa
+     * Nexpose, maksaa
+     * Qualys, maksaa
+     * Nmap, rajoitettavuudet tähän tarkoitukseen. Voidaan kuitenkin ajaa lukuisia scriptejä jotka paljastavat erilaisia haavoittuvuuksia.
+          /nsedoc/ Nmap dokumentaatiosta löytyy kaikki scriptit ja kuvaukset niihin.
+- Web-haavoittuvuusskannerit
+     * Nikto, helppokäyttöinen
+     * WPScan, WordPress sivujen skannaukset
+     * SQLmap, SQL injektioihin ja tietokantojen PenTestauksiin.
+     * Burp Suite, suosituin web vuln. skanneri
+     * Zed Attack Proxy (ZAP), täysin ilmainen
+
 
 ## Kali Linux asennus
 Aloitin asentamalla Kali Linux:in, joka tulen käyttämään tämän kurssin harjoituksien tehtävien tekemiseen.
@@ -169,6 +193,68 @@ Tämä muokkaus lähettää siis kyselyn, että kategoria on joko tyhjä TAI ett
 Lopputuloksena saatiin kaikki tuotteet näkyviin ja tehtävän suoritettua.
 
 - ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/564e4e4c-1a05-4dbd-acc5-731b050c15fb)
+
+## Porttiskannaukset
+
+### 1000 tcp-portin skannaus omalta koneelta (localhost)
+
+Aloitin selvittämällä Kali VM:n ip konfiguraatiot:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2ea7024b-7eec-46ef-8307-91dc552f88fd)
+
+Tämän jälkeen käytin nmap:ia skannaakseen localhostin 127.0.0.1 1000 yleisintä TCP porttia:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/7f59e30f-8fcb-4827-9cef-2488449a3d0d)
+
+Tulokset paljastavat, että 2 porttia 998:sta olivat auki, nämä portit olivat 8080/tcp (http-proxy) ja 9001/tcp (tor-orport)
+
+### Kaikkien porttien skannaus
+
+Seuraavaksi skannasin localhostilta kaikki portit (1-65535)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/be153284-e327-4687-b582-b9b86a526966)
+
+Avointen porttien tulokset olivat samat kuin edellisessä skannauksessa.
+
+### Laaja porttiskannaus kaikille porteille
+
+Seuraavaksi suoritin 'nmap -A' skannausken kaikille porteille:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/521db4c6-ce87-40a8-ae90-e4c189602942)
+
+Tulokset:
+   -   Portti 8080 ei anna hirveästi muuta tietoa, kun sen GetRequest vastauksena tuli 404:Not Found. Date osion alla oli ilmeisesti scriptit, mitä nmap yritti ajaa kyseiselle portille ja vastauksena oli tullut 400:Bad Request.
+   -   Portti 9001 näyttää 'jdbc', eli Java Database Connectivity palvelua, joka on ilmeisesti sen takia, että minulla on WebGoat päällä taustalla, jonka tietokanta on yhdistetty porttiin 9001.
+
+### Apache2 aloitus ja uusi laaja porttiskannaus
+
+Aloitin Apache2 daemonin ja tarkistin että se pyörii:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/230011cc-d0e0-4bb8-be76-2ac892e46afa)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/bca20ef0-46c1-4f66-88fa-9bef3e7ff516)
+
+Ajoin laajan porttiskannauksen uudestaan:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/1938b34a-0ded-4d3c-9a76-49192e239680)
+
+Nyt tuloksiin ilmestyi portti 80/tcp (http), joka on Apache:n palvelu ja näyttää Apache2:n oletussivua.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
