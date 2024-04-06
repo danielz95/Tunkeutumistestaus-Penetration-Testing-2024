@@ -240,8 +240,12 @@ Ajoin laajan porttiskannauksen uudestaan:
 
 Nyt tuloksiin ilmestyi portti 80/tcp (http), joka on Apache:n palvelu ja näyttää Apache2:n oletussivua.
 
+#Lähteet
 
 
+https://www.youtube.com/watch?v=X1X1UdaC_90
+
+https://terokarvinen.com/2020/install-webgoat-web-pentest-practice-target/
 
 
 
