@@ -6,6 +6,8 @@ Kurssin tiedot löytyvät täältä: https://terokarvinen.com/2024/eettinen-hakk
 ## Lue/katso ja tiivistä
 Tässä katsoin läpi videosarjaa 'The Art of Hacking (Video Collection):Lesson 4'
 
+https://learning.oreilly.com/videos/the-art-of/9780135767849/9780135767849-SPTT_04_00/
+
 - Aktiivisessa tiedustelussa käytetään erinäisiä työkaluja ja menetelmiä etsiäkseen haavoittuvuuksia hyökättävän kohteen suojauksessa, kuten porttiskannaukset ja haavoittuvuus-skannaukset
 - Metodologiassa edetään järjestyksessä Port scanning, Web Service Review ja lopuksi vasta Vulnerability scanning.
 - Yleisin virhe on hypätä suoraan Vuln. scanningiin ja ohittaa edelliset vaiheet.
