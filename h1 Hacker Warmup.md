@@ -1,6 +1,9 @@
 # h1 Hacker Warmup
 Tässä tehtävässä lämmitellään Tero Karvisen pitämää tunkeutumistestauskurssia varten tekemällä tunkeutumiseen liittyvät harjoitukset.
 
+## Lue ja tiivistä
+Tässä katsoin läpi videosarjaa 'The Art of Hacking (Video Collection)'
+
 ## Kali Linux asennus
 Aloitin asentamalla Kali Linux:in, joka tulen käyttämään tämän kurssin harjoituksien tehtävien tekemiseen.
 
@@ -124,24 +127,53 @@ Seuraavassa harjoituksessa etsin HTTP pyynnöstä numerosarjaa:
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8e23dc4a-36dc-48da-834f-2956949fa64f)
 
+Painoin 'Go!' painiketta, jolloin palvelin lähetti pyynnön hakemaan 'networkNum' numerosarjaa, joka löytyi devtools:in 'Network' osiosta 'Request' välilehdeltä:
 
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d3a1166b-840d-40a2-93b5-7aae7e063b8d)
 
+Syötin saamani numerosarjan 75.64880431849772 ja tarkistuksessa meni läpi!
 
-
-
-
-
-
-
-
-
-
-
- 
-
-   
-
-   
-
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/c4f4a707-1c64-4bde-9ccd-a48a5ddbc295)
 
 ## PortSwigger Labs: SQL injections
+Aloitin tämän harjoituksen menemällä harjoitussivuun: https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/279f358f-7a39-4982-b051-7c7e03b4bbaf)
+
+
+Tässä harjoituksessa olisi tarkoitus tehdä SQL-injektio, joka paljastaa piilotettuja tuotteita, jotka eivät ole vielä julkaistu.
+
+Tein ilmaisen käyttäjän ja pääsin käsiksi harjoituksen labrasivuun.
+
+https://0a87006e03bb2d8e80574981004700fb.web-security-academy.net/filter?category=%27%20or%201=1%20--
+
+Lähdin avaamaan tehtävää tutkimalla kehitystyökalun ikkunan 'Network' ja 'Element' osioita, ja yritin sieltä etsiä SQL lauseita, jotka pystyisi mahdollisesti muokkaamaan. Hetken etsinnän jälkeen pystyin kuitenkin päättelemään, että kategoriat suodatetaan harjoituksen URL osoitteessa esim 'Pets' kohdalla:
+
+- /filter?category='Pets'
+
+Tätä piti siis muuttaa sellaiseen muotoon, jotta se näyttäisi kaikkia tuotteita, sekä sellaisia tuotteita, jotka eivät ole julkisesti saatavilla.
+Hetken pohdinnan jälkeen, etsin ratkaisua PortSwigger harjoituksen sivun 'Solutions' osiolta:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ded5694c-d012-444f-978f-2a89474c6383)
+
+Tämä edellytti jonkun erillisen ohjelman latausta, joka kaappaa network paketteja muokattaviksi ja edelleenlähetettäviksi palvelimeen. Tässä tapauksessa 'Burp Suite', joka voidaan ilmeisesti tulkita Man-in-the-Middle (MitM) hyökkäyksen muotona. Olen käynyt aikaisemmin 'Tietoturvan Perusteet'-kurssilla MitM hyökkäyksiä käyttäen esimerkiksi ZAP Zed Attack Proxy ohjelmaa, joka ajaa samaa asiaa kuin 'Burp Suite'.
+
+Löysin kuitenkin opetusvideon ja ratkaisun tehtävään, joka ei edellyttänyt pakettien sieppausta : https://www.youtube.com/watch?v=X1X1UdaC_90
+
+Tässä muokattiin URL osoitetta:
+
+- /filter?category=' OR 1=1 --
+
+Tämä muokkaus lähettää siis kyselyn, että kategoria on joko tyhjä TAI että se näyttää kaikkia tuotteita (1=1). Viimeinen -- muokkaa loppukyselyn kommentiksi, joten se jättää huomiotta mahdollista 'Released = 1' ehtoa lauseen jatkeessa.
+
+Lopputuloksena saatiin kaikki tuotteet näkyviin ja tehtävän suoritettua.
+
+- ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/564e4e4c-1a05-4dbd-acc5-731b050c15fb)
+
+
+
+
+
+
+
+
