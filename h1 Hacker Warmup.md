@@ -1,6 +1,8 @@
 # h1 Hacker Warmup
 Tässä tehtävässä lämmitellään Tero Karvisen pitämää tunkeutumistestauskurssia varten tekemällä tunkeutumiseen liittyvät harjoitukset.
 
+Kurssin tiedot löytyvät täältä: https://terokarvinen.com/2024/eettinen-hakkerointi-2024/
+
 ## Lue/katso ja tiivistä
 Tässä katsoin läpi videosarjaa 'The Art of Hacking (Video Collection):Lesson 4'
 
