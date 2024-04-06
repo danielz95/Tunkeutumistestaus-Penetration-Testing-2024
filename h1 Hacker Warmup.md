@@ -256,7 +256,10 @@ Over the Wire: Bandit game, https://overthewire.org/wargames/bandit/
 
 Karvinen T., Install WebGoat, https://terokarvinen.com/2020/install-webgoat-web-pentest-practice-target/
 
+JDWilson, WebGoat HTTP Basics (WP Blog), https://thejdwilson.wordpress.com/2020/11/24/webgoat-http-basics/
+
 Khalil R., SQL Injection Lab #1 Web Security Academy (Video): https://www.youtube.com/watch?v=X1X1UdaC_90
+
 
 
 
