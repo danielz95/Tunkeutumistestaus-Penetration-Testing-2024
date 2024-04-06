@@ -173,8 +173,6 @@ Tässä harjoituksessa olisi tarkoitus tehdä SQL-injektio, joka paljastaa piilo
 
 Tein ilmaisen käyttäjän ja pääsin käsiksi harjoituksen labrasivuun.
 
-https://0a87006e03bb2d8e80574981004700fb.web-security-academy.net/filter?category=%27%20or%201=1%20--
-
 Lähdin avaamaan tehtävää tutkimalla kehitystyökalun ikkunan 'Network' ja 'Element' osioita, ja yritin sieltä etsiä SQL lauseita, jotka pystyisi mahdollisesti muokkaamaan. Hetken etsinnän jälkeen pystyin kuitenkin päättelemään, että kategoriat suodatetaan harjoituksen URL osoitteessa esim 'Pets' kohdalla:
 
 - /filter?category='Pets'
