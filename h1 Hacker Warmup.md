@@ -240,18 +240,21 @@ Ajoin laajan porttiskannauksen uudestaan:
 
 Nyt tuloksiin ilmestyi portti 80/tcp (http), joka on Apache:n palvelu ja näyttää Apache2:n oletussivua.
 
-#Lähteet
+# Lähteet
 
+Karvinen T., Tunkeutumistestaus 2024, https://terokarvinen.com/2024/eettinen-hakkerointi-2024/
 
 Santos et al 2018: The Art of Hacking (Video Collection):Lesson 4 (Video series), https://learning.oreilly.com/videos/the-art-of/9780135767849/9780135767849-SPTT_04_00/
 
 Download Kali Linux, https://www.kali.org/get-kali/#kali-virtual-machines
 
-Khalil R., SQL Injection Lab #1 Web Security Academy (Video): https://www.youtube.com/watch?v=X1X1UdaC_90
-
 Karvinen T., Install WebGoat, https://terokarvinen.com/2020/install-webgoat-web-pentest-practice-target/
 
-Karvinen T., Tunkeutumistestaus 2024, https://terokarvinen.com/2024/eettinen-hakkerointi-2024/
+Khalil R., SQL Injection Lab #1 Web Security Academy (Video): https://www.youtube.com/watch?v=X1X1UdaC_90
+
+
+
+
 
 
 
