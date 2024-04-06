@@ -252,6 +252,8 @@ Santos et al 2018: The Art of Hacking (Video Collection):Lesson 4 (Video series)
 
 Download Kali Linux, https://www.kali.org/get-kali/#kali-virtual-machines
 
+Over the Wire: Bandit game, https://overthewire.org/wargames/bandit/
+
 Karvinen T., Install WebGoat, https://terokarvinen.com/2020/install-webgoat-web-pentest-practice-target/
 
 Khalil R., SQL Injection Lab #1 Web Security Academy (Video): https://www.youtube.com/watch?v=X1X1UdaC_90
