@@ -242,6 +242,31 @@ Ajoin laajan porttiskannauksen uudestaan:
 
 Nyt tuloksiin ilmestyi portti 80/tcp (http), joka on Apache:n palvelu ja näyttää Apache2:n oletussivua.
 
+## Avointen lähteiden tiedustelun työkalu
+
+Tähän tehtävään valitsin SherlockProject:in kehittämä 'Sherlock' työkalu, joka etsii netistä olemassa olevia tilejä sosiaalisessa mediassa tai muilla alustoilla käyttäjänimihaun perusteella.
+
+Tätä työkalua saa ladattua GitHub reposta ja ajettua CLI:llä.
+
+Aloitin kloonaama Sherlock repo:n täältä: https://github.com/sherlock-project/sherlock
+Täältä löytyy myös asennus- ja käyttöohjeet työkalulle.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d4f27875-f448-4d33-834b-1efb78619ae2)
+
+Seuraavaks siirryin sherlock hakemistoon ja asennan tarvittavat paketit Sherlockin pyörittämiseen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/bb1b5a50-7345-4a06-8a67-77b591ebdaa2)
+
+Tämä siis asentaa python3 paketin lisäosia, jotka ovat lueteltu requirements.txt tekstitiedostossa.
+
+Kun tarvittavat lisäosat ovat asennettu, kokeillaan sherlockin käyttöä. Valitsen käyttäjätunnukseksi **danielz95**, joka toimii ainakin GitHub käyttäjänimenäni.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/926c2a3c-c1b5-45b4-a65a-87f9f85abdb8)
+
+Haku tuotti käyttäjänimelle 35 tulosta. Haussa tunnistan GitHub käyttäjänimeni lisäksi pari muuta palvelua, mutta suurin osa palveluista ovat muiden ihmisten luomia käyttäjätilejä.
+
+
+
 # Lähteet
 
 Karvinen T., Tunkeutumistestaus 2024, https://terokarvinen.com/2024/eettinen-hakkerointi-2024/
@@ -257,6 +282,8 @@ Karvinen T., Install WebGoat, https://terokarvinen.com/2020/install-webgoat-web-
 JDWilson, WebGoat HTTP Basics (WP Blog), https://thejdwilson.wordpress.com/2020/11/24/webgoat-http-basics/
 
 Khalil R., SQL Injection Lab #1 Web Security Academy (Video): https://www.youtube.com/watch?v=X1X1UdaC_90
+
+Sherlock, Find usernames across many social networks: https://github.com/sherlock-project/sherlock
 
 
 
