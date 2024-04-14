@@ -140,7 +140,8 @@ Wiresharkin mukaan skannausn tuotti yhteensä 131 146 TCP pakettia. Paketeista h
 Tässä tallennetaan skannauksen tulos -oA optioilla, joka tallentaa sitä .gnmap, .nmap ja .xml muodoissa.
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/93c9792a-c268-40c5-802e-3b576d82f5eb)
-Tässä kuvassa on esitetty .nmap formaatin logi, mikä oli selkein formaatti luettavuudeltaan konsolissa.
+
+Yllä olevassa kuvassa on esitetty .nmap formaatin logi, mikä oli selkein formaatti luettavuudeltaan konsolissa.
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a30d4b64-c017-4a41-aeba-ded4bb3b3544)
 
