@@ -457,6 +457,12 @@ Löydettiin aliverkko nimeltään 'redhat', joka poikkesi muista aliverkoista.
 
 # e) Tee msfvenom-työkalulla haittaohjelma, joka soittaa kotiin (reverse shell). Ota yhteys vastaan metasploitin multi/handler -työkalulla.
 
+Aloitin tehtävän etsimällä tietoa netistä msfvenomin payloadien tekemiseen ja löysin oheisen videon, mikä selittää hyvin auki kaikki tehtävän vaiheet: https://www.youtube.com/watch?v=ZqWfDrD2WVY&t=337s
+
+**Ennen kun aloitin, varmistin että Kali VM oli Host-Only moodissa eikä ollut yhteydessä nettiin**
+
+Tämän tehtävän tekemiseen vaatii itseltäni vielä hieman itseopiskelua ja perehtymistä, jonka teen sunnuntaina. Valitettavasti tämä menee yli deadlinen, mutta yritän saada sen ja loput tehtävät ASAP valmiiksi.
+
 # f) Asenna Windows virtuaalikoneeseen. Voi olla esimerkiksi Metasploitable 3 tai Microsoftin sivuilta saatava ilmainen kokeiluversio.
 
 # g) Ota Windowsiin graafinen etähallintayhteys Linuxista. Käytä RDP:tä eli Remote Desktop Protocol.
