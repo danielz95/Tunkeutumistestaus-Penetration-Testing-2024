@@ -320,11 +320,147 @@ Saatiin SECRET.md tiedoston sisältö auki!
 
 # d) Fuffme. Asenna Ffufme harjoitusmaali paikallisesti omalle koneellesi. Ratkaise tehtävät (kaikki paitsi ei "Content Discovery - Pipes")
 
+## Testiympäristön konffaus:
+
+Asennetaan Kali:lle docker.io:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/db0b20c9-8dac-46b5-b27d-f785198b6ed8)
+
+Kloonataan ffufme-maalikoneen repo:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/c95d1a5a-965e-4533-ad25-32120eb7720d)
+
+Rakennetaan ffufme kone dockeriin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3d185d5d-6080-457a-8680-c308053ca031)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d54e586e-57e4-43e0-90bb-4ef3084b5d72)
+
+Käynnistetään ffufme maalikone:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/19a44f6a-8789-4039-8b27-1ee3ced93899)
+
+Tarkistin, että ffuf.me toimii localhost portilla 80:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/e224007c-6fd1-4289-bc0a-e666b76dd203)
+
+Ladataan wordlistit:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d0ee358d-5f64-40aa-be8c-72751985bbbb)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/946d2324-188f-4b55-ab9b-0de4640729a9)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/31a4ed1b-38a5-4b82-bf62-3299e2299704)
+
+Nyt on kaikki tarvittavat asennettu ja ladattuna. Kytkin vielä 'Host-only' verkkomoodin Kalille ennen harjoituksien aloittamista
+
+## Harjoitukset
+
+### Content Discovery
+
+**Basic:** 
+
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b83af460-ae97-4fdc-a315-be9651a30305)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/1defdb13-5a46-4693-a486-03e9add92b3b)
+
+Löydettiin 'class' ja 'development.log' tiedostot
+
+**Recursion:** 
+
+-recursion lippu käskee fuzzerin tekemään uuden haun löytämäänsä hakemiston sisälle niin kauan, kun se pääsee hakemiston loppuun. Tässä tapauksessa /admin -> /admin/users/ -> /admin/users/96
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/7d126042-9c56-4717-9fe2-89d0e4dea82b)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/9ca5fce4-4157-4611-944c-8fd5aa30bf7a)
+
+**File extensions:**
+
+-e lipulla voidaan yksilöidä tiedostotyyppiä, tässä tapauksessa etsittiin .log tiedostoja hakemistosta /users/users.log
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/5fe4b600-1e04-4ab8-8b98-d9546d180347)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/e451666b-6232-4ab7-a243-461831c2b113)
+
+**No 404 status:**
+
+Tässä etsittiin "Page can not be found" sivua, mutta tuloksia tuli aika paljon.  
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2ee938f4-7ff2-44f0-99a9-b1fe1945d93a)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/27d61203-270c-4ee2-98be-62d7cbcbe061)
+
+Yleisin koko sivuille on 669 tavua, joten suodatetaan -fs 669 lipulla sen kokoiset sivut pois:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/90109ec0-0628-40fd-b48e-156f176c0065)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/59a78314-2685-4682-ab7e-bd731773fd4c)
+
+Nyt saatiin yksilöity joukosta 'secret' niminen sivu.
+
+**Param Mining:**
+
+Vieraillaan sivulla /cd/param/data, joka palauttaa oheisen virheen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2b4a5a76-4712-4a24-8710-5bd3e8188603)
+
+Tämä palauttaa HTTP 400 koodin 'Bad Request'. ffuf:lla yritetään etsiä oikea parametri:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/fc23f19e-586f-46d6-8bf2-551ab43b053b)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/cff03d45-6293-4f3b-a1ec-25d37efeb88d)
+
+Selvisi, että 'debug' oli oikea parameti, jolloin URL:iin syötettynä sivu toimii:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/cff5159d-eacd-4caa-ab10-9b21462c55b0)
+
+**Rate Limited:**
+
+Testataan ffuf:ia oletusnopeudella etsimään sivuja -mc 200,429 lipulla, joka palauttaa vain HTTP status koodit 200 ja 429 sivuja:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/39aaa133-6f6e-4cd8-83b3-498d10ac541a)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/4bac69eb-0e4f-4ac4-aee2-b0e3535ea1d0)
+
+
+Vastaukset palauttivat pelkästään Status: 429 sivuja, joka tarkoittaa että pyyntöjä ovat tilapäisesti estetty niiden suuren määrän vuoksi. 
+
+Seuraavaksi rajoitetaan pyynnöt käyttämällä `-p 0.1` lippua, joka pysähtyy pyyntöjen välissä 0.1 sekunttia, sekä `-t 5`
+lippua, joka luo 5 eri ffuf prosessia, jolloin pyyntöjä tehdään max 50 per sekuntti, jolloin palvelin ei ylikuormitu.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3d6f6a42-0bc7-427c-bfd4-6bb86a476ad8)
+
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/4f3ea3af-41b6-4dd2-93f3-1415ddcb29cd)
+
+Nyt löydettiin HTTP status 200 vastaus, joka on 'oracle'.
+
+### Subdomains
+
+**Virtual Host Enumeration**
+
+ffuf voidaan käyttää myös löytämään aliverkkoja
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b9586e85-8928-43d7-9eaa-d4061a56dcee)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/63bb29bb-72c3-420b-8193-493647560610)
+
+Yhtenäistä näissä on koko: 1495, sanat: 230, rivit: 40. Suodatetaan ne koon mukaan:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/aadd3e51-a67e-4f4e-ad86-9ec90bb40169)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/89ee76be-3f80-4c93-8d70-fa4d2ed968ce)
+
+Löydettiin aliverkko nimeltään 'redhat', joka poikkesi muista aliverkoista.
+  
+
 # e) Tee msfvenom-työkalulla haittaohjelma, joka soittaa kotiin (reverse shell). Ota yhteys vastaan metasploitin multi/handler -työkalulla.
 
 # f) Asenna Windows virtuaalikoneeseen. Voi olla esimerkiksi Metasploitable 3 tai Microsoftin sivuilta saatava ilmainen kokeiluversio.
 
 # g) Ota Windowsiin graafinen etähallintayhteys Linuxista. Käytä RDP:tä eli Remote Desktop Protocol.
+
 
 
 
