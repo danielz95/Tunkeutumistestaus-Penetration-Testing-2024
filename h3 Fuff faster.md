@@ -528,6 +528,13 @@ Nyt kun joku lataa ja ajaa hostaamamme 'reverse_tcp.exe' tiedoston windows konee
 
 # f) Asenna Windows virtuaalikoneeseen. Voi olla esimerkiksi Metasploitable 3 tai Microsoftin sivuilta saatava ilmainen kokeiluversio.
 
+Latasin ja asensin vagrant AMD64 version 2.4.1 windows11 host koneelleni:
+
+https://developer.hashicorp.com/vagrant/install?product_intent=vagrant
+
+Menin metasploitable3 github sivuun ja seurasin quick-start ohjeet:
+
+https://github.com/rapid7/metasploitable3/tree/master
 
 
 # g) Ota Windowsiin graafinen etähallintayhteys Linuxista. Käytä RDP:tä eli Remote Desktop Protocol.
