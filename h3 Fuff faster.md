@@ -528,16 +528,46 @@ Nyt kun joku lataa ja ajaa hostaamamme 'reverse_tcp.exe' tiedoston windows konee
 
 # f) Asenna Windows virtuaalikoneeseen. Voi olla esimerkiksi Metasploitable 3 tai Microsoftin sivuilta saatava ilmainen kokeiluversio.
 
-Latasin ja asensin vagrant AMD64 version 2.4.1 windows11 host koneelleni:
+Minulla oli aikaisemmasta kurssista ladattu Windows 11 VMware kone, jonka latasin täältä:
 
-https://developer.hashicorp.com/vagrant/install?product_intent=vagrant
+https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/
 
-Menin metasploitable3 github sivuun ja seurasin quick-start ohjeet:
+Tosiaan kali on VirtualBoxissa ja Windows 11 on VMwaressa, joten muokkailin verkkoasetuksia niin, että:
 
-https://github.com/rapid7/metasploitable3/tree/master
+-  Kali VirtualBox on Host-only verkossa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/bb78fbad-3927-4794-943a-6597fce6daa9)
+
+-  Windows 11 on Bridged modessa, joka on kytketty VirtualBox Host-Only Ethernet Adapteriin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/0177f576-bb79-4cc6-9b1b-c6db24fcf2da)
+
+Näin sain ne samaan lähiverkkoon päästämättä ne nettiin:
+
+-  Windows 11 ipconfig:
+
+  ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/38ffbb05-664d-44c5-8267-6a375ac1cc3a)
+
+- Kali ifconfig:
+
+  ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/5c2ee695-2db5-4882-b36b-b18ccdb74002)
+
+### Ping-testit:
+
+Kali -> Windows 11:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/bb007c39-dcd9-423f-8ade-f199c3d5cedd)
+
+Windows 11 -> Kali:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/e835cbf9-b3cc-4530-bad0-6cd9cd5ecae2)
 
 
 # g) Ota Windowsiin graafinen etähallintayhteys Linuxista. Käytä RDP:tä eli Remote Desktop Protocol.
+
+Aikaisemmin luotu reverse tcp exploitti voidaan nyt toteuttaa ottamaan Windows 11 kone haltuun.
+
+Aloitetaan "houkuttelemalla" Windows 11 hostia lataamaan meidän Kalin hostaamaa 'reverse_tcp.exe' tiedostoa:
 
 
 
