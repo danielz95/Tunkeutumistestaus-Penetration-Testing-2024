@@ -569,6 +569,17 @@ Aikaisemmin luotu reverse tcp exploitti voidaan nyt toteuttaa ottamaan Windows 1
 
 Aloitetaan "houkuttelemalla" Windows 11 hostia lataamaan meidän Kalin hostaamaa 'reverse_tcp.exe' tiedostoa:
 
+Kohtalokkaaksi ongelmaksi tuli se, ettei Windowsilta pystynyt ottamaan yhteyttä http serveriin, enkä tämän vuoksi pystynyt jatkaa tehtävää loppuun.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/015a810e-d014-49d5-bd78-c88d844d736a)
+
+Olin yrittänyt mm.
+
+-  Tehdä palomuurisäännöt päästääkseen port 8000 liikenteen läpi
+-  Sammuttanut kokonaan Windows Firewallin
+-  yrittänyt hostaa http.server eri porteille
+-  Yrittänyt hostaa http serveria Apache2:lla
+
 
 
 
