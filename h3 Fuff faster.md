@@ -459,11 +459,76 @@ Löydettiin aliverkko nimeltään 'redhat', joka poikkesi muista aliverkoista.
 
 Aloitin tehtävän etsimällä tietoa netistä msfvenomin payloadien tekemiseen ja löysin oheisen videon, mikä selittää hyvin auki kaikki tehtävän vaiheet: https://www.youtube.com/watch?v=ZqWfDrD2WVY&t=337s
 
+Tässä selitetään hyvin, miten reverse TCP exploitti luodaan ja käytetään multi/handler ympäristössä, jolla pystytään ottamaan kohdetietokoneen haltuun.
+
 **Ennen kun aloitin, varmistin että Kali VM oli Host-Only moodissa eikä ollut yhteydessä nettiin**
 
-Tämän tehtävän tekemiseen vaatii itseltäni vielä hieman itseopiskelua ja perehtymistä, jonka teen sunnuntaina. Valitettavasti tämä menee yli deadlinen, mutta yritän saada sen ja loput tehtävät ASAP valmiiksi.
+### Payloadin luonti
+
+Aloitin selvittämällä Kalin ip konfiguraation:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/5ba33040-7bd8-40f9-9109-86725d8e7b7d)
+
+eth0 ipv4 osoite on 192.168.56.103
+
+Seuraavaksi luodaan tiedosto Kaliin, johon exploitti luodaan:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a8f829b6-cd13-49b2-bf41-cf881539698f)
+
+
+Luodaan exploitti msfvenomilla juuri luomaamme kansioon:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a99a5ef0-feaa-40d7-a625-a06164a8034a)
+
+
+Ylläolevassa komennossa määritellään:
+-  payload (-p) joka on windows/meterpreter/reverse_tcp
+-  Local host (lhost) joka on meidän Kalin ipv4 osoite
+-  Listening port (lport) joka on meidän Kalin kuunteleva portti
+-  File type (-f) joka on 'exe' ajettavaksi Windows koneella
+-  Luodaan tiedosto 'reverse_tcp.exe' (>) meidän luomaamme reverse_tcp kansioon
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b87ce712-6ff7-4916-adbf-b65ed5861068)
+
+Exploitti on nyt luotu nimellä 'reverse_tcp.exe' meidän reverse_tcp kansioon.
+
+### Payloadin hostaaminen
+
+Seuraavaksi meidän täytyy keksiä keino, miten vakuutetaan kohdekonetta lataamaan ja suorittamaan exploitimme. Tämä voidaan tehdä mm. hostaamalla exploitti HTTP palvelimen kautta. Käytän python3 http.server moduulia tätä harjoitusta varten, kuten opastusvideossakin tehtiin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/090556a1-bcfe-435f-89c7-72448153de66)
+
+Selaimella tarkistettuna, meillä on nyt latauslinkki meidän exploittiin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a6973f6b-23bd-4e8a-8980-5b03e9e2d7b6)
+
+Jätetään http.server terminaali pyörimään taustalle.
+
+### Multi/handler
+
+Avataan uudessa terminaalissa msfconsole ja käytetään multi/handler exploit:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/85df1e92-dd7e-4867-a628-d8672a83711c)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/4a8f75c8-5981-4fd3-8a09-11f0fa89dc2d)
+
+Seuraavaksi määritellään:
+- Mitä payloadia käytetään (windows/meterpreter/reverse_tcp)
+- Localhostin osoite (192.168.56.103)
+- Listenin port osoite (5555)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/41668e04-8850-4f33-9902-9916e3750e45)
+
+Kun asetukset ovat määritelty, toteutetaan exploitti:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/858d4819-dceb-48e2-bee0-b0384688ac83)
+
+Nyt kun joku lataa ja ajaa hostaamamme 'reverse_tcp.exe' tiedoston windows koneella, se soittaa koneellemme ja pääsemme etähallitsemaan sen meterpreter session kautta. Tämä testataan seuraavassa tehtävässä.
+
 
 # f) Asenna Windows virtuaalikoneeseen. Voi olla esimerkiksi Metasploitable 3 tai Microsoftin sivuilta saatava ilmainen kokeiluversio.
+
+
 
 # g) Ota Windowsiin graafinen etähallintayhteys Linuxista. Käytä RDP:tä eli Remote Desktop Protocol.
 
