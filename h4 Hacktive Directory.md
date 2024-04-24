@@ -25,9 +25,7 @@ Näillä komennoilla pystytään keräämään tietoja Windows AD:n DNS, Control
   Esimerkkejä:
 
 -  `Get-Domain` : Palauttaa nykyisen tai erikseen määritellyn domainin objekteja
-
 -  `Set-DomainObject` : Muokkaa Domain objektiin liittyviä ominaisuuksia
-
 -  `Find-InterestingDomainAcl` : Etsii objekti ACL:iä joilla on muokkausoikeuksia muulla kuin built-in objekteilla
 
   **GPO Functions**
@@ -50,4 +48,30 @@ Esimerkkejä:
 -  `Find-InterestingFile`: Etsii tiedostoja jotka sopivat asetettuihin hakukriteereihin. Hyödynnettiin tätä seuraavan tehtävän tekemisessä ;)
 
 **Threaded 'Meta'-Functions**
+
+Enimmäkseen Domain kohtaisia hakufunktioita
+
+Esimerkkejä:
+
+- `Find-DomainUserLocation`: Etsii domain koneita, johon tietyt käyttäjät ovat kirjautuneet
+- `Find-InterestingDomainShareFile`: Etsii tiedostoja jotka sopivat asetettuihin hakukriteereihin luettavista jakokohteista domainilla.
+- `Find-LocalAdminAccess`: Etsii koneita domainilla, josta löytyy kirjautuneita käyttäjiä, jolla on local Admin oikeuksia.
+
+**Domain Trust Functions**
+
+Domain Trust / Luottamussuhteisiin liittyvät funktiot
+
+Esimerkkejä:
+
+-  `Get-DomainTrust`: Palauttaa kaikki domain luottamussuhteet nykyiselle tai valitulle domainille
+-  `Get-DomainTrustMapping`: Kerää kaikki luottamussuhdetiedot nykyisestä domainista ja myös jokaiselle domaineille joka löydetään.
+
+
+# a) Ratkaise Nikitan / WithSecuren Windows-haaste. Älä julkaise läpikävelyohjetta, myöskään itse kirjoittamaasi. (Update: Tämä on nyt siis kerrankin sellainen tehtävä, johon voi vastata vain "tehty").
+
+Tilanne 24.4.2024 Klo 22:54
+
+Sain tehtyä tähän menneessä 4/6 WithSecure Playground labran tehtävistä.
+
+Jatkan tekemistä ennen kuin labra sulkeutuu Sunnuntaina 28.4.2024
 
