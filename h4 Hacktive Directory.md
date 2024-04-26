@@ -69,9 +69,23 @@ Esimerkkejä:
 
 # a) Ratkaise Nikitan / WithSecuren Windows-haaste. Älä julkaise läpikävelyohjetta, myöskään itse kirjoittamaasi. (Update: Tämä on nyt siis kerrankin sellainen tehtävä, johon voi vastata vain "tehty").
 
-Tilanne 24.4.2024 Klo 22:54
+## Tilanne 24.4.2024 Klo 22:54
 
 Sain tehtyä tähän menneessä 4/6 WithSecure Playground labran tehtävistä.
 
 Jatkan tekemistä ennen kuin labra sulkeutuu Sunnuntaina 28.4.2024
+
+## Tilanne 26.4.2024 Klo 15:45
+
+Sain tehtyä 5/6 tehtävistä.
+
+### klo 17:03
+En saanut tehtyä viimeistä tehtävää, sillä minulla oli ongelmia "Rubeus.exe":n suorittamisessa ja ticketer.py:n suorittamisessa. 
+
+#Lähteet
+
+PowerView, https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon
+
+Ponomarev N., Attacking windows and active directory, Luento 22.4.2024
+
 
