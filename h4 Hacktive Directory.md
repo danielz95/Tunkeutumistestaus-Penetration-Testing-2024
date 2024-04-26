@@ -82,7 +82,7 @@ Sain tehtyä 5/6 tehtävistä.
 ### klo 17:03
 En saanut tehtyä viimeistä tehtävää, sillä minulla oli ongelmia "Rubeus.exe":n suorittamisessa ja ticketer.py:n suorittamisessa. 
 
-#Lähteet
+# Lähteet
 
 PowerView, https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon
 
