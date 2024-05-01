@@ -580,6 +580,19 @@ Olin yrittänyt mm.
 -  yrittänyt hostaa http.server eri porteille
 -  Yrittänyt hostaa http serveria Apache2:lla
 
+# Lähteet
+
+Karvinen T., Find Hidden Web Directories with ffuf, https://terokarvinen.com/2023/fuzz-urls-find-hidden-directories/
+
+Karvinen T., Cracking Passwords with Hashcat, https://terokarvinen.com/2022/cracking-passwords-with-hashcat/
+
+Karvinen T., Crack File Passwords With John, https://terokarvinen.com/2023/crack-file-password-with-john/
+
+ffuf Web Fuzzer, https://github.com/ffuf/ffuf
+
+
+
+
 
 
 
