@@ -137,7 +137,7 @@ Kävin kytkemässä selaimen HUD näkymän pois päältä valitsemalla ZAP:in yl
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ebb6dbb3-e3e6-4227-b297-d6ee54c56dac)
 
-Proxyn saa päälle Firefoxiin avaamalla sen ZAP yläpalkin Firefox ikkunasta:
+Proxyn saa päälle Firefoxiin avaamalla sen ZAP yläpalkin Firefox ikonista:
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/f5b3cda5-c4ce-4bc2-9da1-97b46c8e0336)
 
@@ -157,7 +157,7 @@ Hakupyyntö ilmestyy myös ZAP:iin:
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/deb1220c-9239-4d81-9423-f3fa6deb99eb)
 
-**En oikein ymmärtänyt miten ohjesituksessa mainittiin, että localhost ei toimi ilman FoxyProxya. Ehkä tämä selkenee tehtävää edetessäni. **
+**En oikein ymmärtänyt miten ohjesituksessa mainittiin, että localhost ei toimi ilman FoxyProxya. Ehkä tämä selkenee tehtävää edetessäni.**
 
 ### CA-sertifikaatin generointi ja asennus Firefoxiin
 
