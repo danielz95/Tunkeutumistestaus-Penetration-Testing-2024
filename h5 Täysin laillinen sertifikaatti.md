@@ -113,6 +113,57 @@ XSS hyökkäyksien tyyppejä ovaat:
   
 -  DOM-based (Document Object Model) XSS: Hyödynnetään JavaScriptiä, joka käytetään HTML sivulla suorittamaan HTML toimintoja. Jos hyökkääjä pääsee käsiksi näihin toimintoihin, skriptiä voi ajaa osana jotakin ns. sivun normaalia toimintoa.
 
+# a) Totally Legit Sertificate. Asenna OWASP ZAP, generoi CA-sertifikaatti ja asenna se selaimeesi. Laita ZAP proxyksi selaimeesi. Laita ZAP sieppaamaan myös kuvat, niitä tarvitaan tämän kerran kotitehtävissä. Osoita, että hakupyynnöt ilmestyvät ZAP:n käyttöliittymään. (Ei toimi localhost:lla ilman Foxyproxya)
+
+### ZAP asennus
+
+Aloitin asentamalla Kali virtuaalikoneeseeni ZapProxy komennolla:
+
+`sudo apt-get -y install zaproxy`
+
+Asennuksen jälkeen käynnistin:
+
+`zaproxy`
+
+ZAP:in käynnistyessä valitsin 'Persist ZAP Session' vaihtoehtoon NO:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3c26f37d-4697-4120-aa3b-125b60759b49)
+
+ZAP:in versio:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/1b94d132-8edb-4b65-9388-3837e40a0123)
+
+Kävin kytkemässä selaimen HUD näkymän pois päältä valitsemalla ZAP:in yläpalkista **Tools -> Options... -> HUD -> Enable when using ZAP Desktop** ja poistamalla ruksin sen kohdasta.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ebb6dbb3-e3e6-4227-b297-d6ee54c56dac)
+
+Proxyn saa päälle Firefoxiin avaamalla sen ZAP yläpalkin Firefox ikkunasta:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/f5b3cda5-c4ce-4bc2-9da1-97b46c8e0336)
+
+Tämä avaa Firefoxin automaattisesti käyttäen localhost:8080 proxya:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/5774ca8a-97a5-4bee-b5a2-b43387cf80f7)
+
+Laitoin seuraavaksi Apache2 web-palvelimen päälle Kalilla:
+
+`sudo systemctl start apache2`
+
+Testasin proxy selaimella mennä siihen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8ba4a1fe-2cda-448d-a91d-133a45af2c16)
+
+Hakupyyntö ilmestyy myös ZAP:iin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/deb1220c-9239-4d81-9423-f3fa6deb99eb)
+
+**En oikein ymmärtänyt miten ohjesituksessa mainittiin, että localhost ei toimi ilman FoxyProxya. Ehkä tämä selkenee tehtävää edetessäni. **
+
+### CA-sertifikaatin generointi ja asennus Firefoxiin
+
+
+
+
 
 
 
