@@ -272,7 +272,189 @@ Syötin **Login** ikkunaan carlosin kirjautumistiedot ja sain Labran ratkottua!
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ae3e7e9b-ed0e-4f8e-9cd5-e8f0179c096f)
 
-## 
+## d) File path traversal, simple case
+
+Tässä oli tarkoitus saada `etc/passwd` hakemiston tietoja.
+
+Katsoin ZAP request headereista kuvatiedostot ja ne oli URL muodossa:
+
+**/image?filename=xx.jpg**
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/0479f3a6-c0e1-4dae-96bb-b036b29369bc)
+
+Lähdetään tässä muuttamaan .jpg tiedostojen tilalle tiedostopolkua etc/passwd hakemistoon.
+
+Seurasin tämän artikkelin avulla path traversal peiaatteen ja lähdin toteuttamaan: https://portswigger.net/web-security/file-path-traversal
+
+Hain jonkun kuvatiedoston tiedon ZAP:ista:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/77066528-0efa-42f4-b118-9c622c4b3ad2)
+
+Laitoin tämän Requesteriin ja muokkasin syntaksin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/be5553c2-97cd-4aea-ab2d-0e7bf766b85f)
+
+Tässä muutetaan tiedostopolkua, jossa kuvat ovat oletettavasti **var/www/images** hakemistopolulla palvelimen puolella. Käytännössä uudella muokatulla pyynnöllä siirrytään hakemistossa 3 kertaa taaksepäin root kansioon ja sen jälkeen eteenpäin **/etc/passwd** kansioon. 
+
+Lähetin pyynnön ja sain labran ratkottua!
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/9d40d8c1-71d5-4c5a-94ca-97963f0dedd4)
+
+# e) File path traversal, traversal sequences blocked with absolute path bypass
+
+Tässä on sama tavoite kuin edellisessä "Path traversal" tehtävässä, mutta polkujen vaihtosyntaksit ovat blokattu. 
+
+Hain kuvatiedostoa sisältävän headerin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d8dc7fff-dd7b-4308-9c0a-518ba6fadb86)
+
+Yritin kiertää polun vaihtosyntaksin laittamalla tilalle `....//`
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/7d119843-675c-4759-b86f-352d296190bc)
+
+Tämä ei tuottanut tulosta, joten kokeilin kirjoittaa absoluuttisen polun Requestiin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/080ebfd1-218c-4e3b-99e0-636abac322d9)
+
+Näin se lähti toimimaan hakemalla tiedoston absoluuttista polkua!
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/70a5cdd2-ceb0-4b81-aeb4-bfa47a1b7320)
+
+# f) File path traversal, traversal sequences stripped non-recursively
+
+Tässä sama periaate kuin edellisissä path traversal tehtävissä, mutta tällä kertaa käytetään 'non-recursive' polkujen vaihtoa. Eli palvelin blokkaa normaalia `../` polunvaihtosyntaksia, joten käytetään `....//` syntaksia kiertämään tätä blokkia.
+
+Etsin jälleen Image headerin requesteista:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8943427b-c56f-4e99-8362-83fad7cb6241)
+
+Tämän jälkeen laitoin sen Requesteriin ja vaihdoin syntaksin, sekä lähetin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/4854351d-3892-4533-8b89-15cfe7480f70)
+
+Palvelin vastaa statuksella **200 OK** eli pyyntö meni läpi ja sain tehtävän tehtyä!
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/fb288f5b-ad78-456e-a1d5-9384b2a879a5)
+
+# g) Server-side template injection with information disclosure via user-supplied objects
+
+Tässä suoritetaan SSTI injektio, jossa hyödynnetään palvelinpuolen template enginen haavoittuvuutta. Tarkoitus on löytää frameworkin salainen avain.
+
+Tehtävänannossa annettiin kirjautumistunnus ja salasana **ID: content-manager / PW: C0nt3ntM4n4g3r**
+
+Aloitin kirjautumalla **content-manager** käyttäjällä sisään:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b15941b6-f8d9-498c-a58f-75e89074df88)
+
+Seuraavaksi valitsin jonkun tuotteen kotisivulta ja valitsin tuotteen sivulta **Edit template** nappia:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/c81efe96-5e0c-4dae-93b6-c1873f8b732c)
+
+Tästä pääsee muokkaamaan tuotteen **Description osiota**. Huomasin, että viimeisellä rivillä sivu hakee tuotteen nimen, hinnan ja saldoarvot tietyllä templatella käyttäen **{{teksti}}** muotoa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8722619e-0b45-4afd-94dd-7b9bf39647ce)
+
+Pitkän ihmettelyn ja kokeilun jälkeen, päätin katsoa ratkaisuvideon tästä, missä kerrottiin eri vaiheet:
+https://www.youtube.com/watch?v=8o5QPU-BvFQ&t=243s
+
+Tässä on siis kyseessä Django frameworkin, josta voidaan selvittää syöttämällä templateen `{% debug %}` toiminnon:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a859c601-aa35-4e8a-81e3-92db1a1f67cf)
+
+Se näyttää meille debuggerin kautta Pyhton kirjaston kontentin, jonka kautta lähdetään selvittämään salaisen avaimen.
+
+Löysin HackTricks:in sivulta tietoa, miten salaisen avaimen saa näkyviin syöttämällä templateen **{{settings.SECRET_KEY}}**:
+
+https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2b2fd530-6cc8-4736-b53b-e199a41489a5)
+
+Syötin tämän labran Template editoriin ja tällä sain salaisen avaimen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/caaa0a61-ac60-46f8-87cc-20c3d4919bbb)
+
+Syötin avaimen vastauskenttään ja näin ratkaisin tehtävän:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/02b41378-74f7-44b8-b3e5-dd680c86a998)
+
+
+# h) Basic SSRF against the local server
+
+Tässä tehtävänä on päästä käsiksi **http://localhost/admin** tilille ja poistaa käyttäjää **carlos**
+
+Tässä tehtävänannossa mainittiin, että stock check toiminnossa on haavoittuvuus, jossa pystytään sitä kautta saamaan admin oikeudet käyttöön.
+
+Aloitin avaamalla labrasivusta jonkun tuotteen ja tarkistamalla sen varastosaldoa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2ebf1efe-71ff-4d7d-b4c7-1d69f59edff1)
+
+ZAP:ista ilmestyy POST headeri, jonka syötin requesteriin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/9c83ca9e-c623-4a16-b9e7-cbf8bd3bf953)
+
+Tässä kohdassa **StockApi** arvo muutetaan ja pyyntö lähetetään:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3ea1bb36-0d30-4032-af20-13e1dd7c9cf5)
+
+Response osiossa näkyy Admin Panel:in HTML sisältö, jossa löytyy toiminto poistaa käyttäjiä.
+
+Lähetin uuden StockApi pyynnön uudella parametrillä poistaakseen käyttäjää **carlos**
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ec52e23a-f23a-4652-a327-58b1de09b557)
+
+Vastaus ilmoittaa, että **Admin interface only available if logged in as an administrator, or if requested from loopback**. Oletan, että kun pyyntö tehtiin localhost:in kautta niin se meni läpi. Sain tämän tehtävän suoritettua:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8bf6b4b5-35af-4bcb-be80-2c0a03b3f492)
+
+# i) Reflected XSS into HTML context with nothing encoded
+
+Tässä tehtävässä on tarkoitus tehdä XSS hyökkäys kutsumalla **alert** funktiota.
+
+Aloitin perehtymällä aiheeseen tarkemmin: https://portswigger.net/web-security/cross-site-scripting/reflected
+
+XSS artikkelia luettuani, lähestyin tehtävään yritten etsiä 'search' parametriä HTTP paketista ja syöttämällä hakutermin tilalle skriptiä.
+
+Aloitin tekemällä esimerkkihakua hakusanalla 'gift':
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/cf85c081-c209-4cce-9f82-4cdde77add0d)
+
+Sen jälkeen etsin requesteistä headerin, jossa hakusanaparametri esiintyy:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/f8d0eb64-8f3e-4346-9f24-67ad4d5919b8)
+
+Muokkasin hakuparametriä niin, että se ajaa scriptin **alert("You have been swigged!)**:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/e1895637-7c0f-41d4-9ebf-f2d64c8edc42)
+
+Pyyntö oli ajanut skriptin hakuparametriin ja GET request oli muuntanut skriptin syntaksia erikoismerkkien **< ja >** kohdille. 
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b15d8f26-b13e-4c4f-a5dd-4c57326dd73b)
+
+Tehtävä meni läpi:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/dc889812-5f03-44f8-883e-aa3142d13b82)
+
+# j) Stored XSS into HTML context with nothing encoded
+
+Tässä tehdään Stored XSS hyökkäys, jossa postataan blogisivun kommenttikenttään skripti, joka suoriutuu kun blogisivua avataan.
+
+Aloitin avaamalla jonkun blogijulkaisun ja kirjoittamalla kommenttiin scriptin ja täyttämällä loput tiedot tarvittaviin kenttiin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/db256b01-3147-4334-a184-1736e52c609c)
+
+Painoin **Submit** ja tehtävä ratkesi!
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a39b01f6-52df-45da-87bf-b2e97c1fa5b8)
+
+Nyt kun yritin päivittää sivua, niin alert ilmestyy:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/57bfab1e-8380-4ee3-b540-8cea8785f7e5)
+
+
+
+
+
+
 
 
 
