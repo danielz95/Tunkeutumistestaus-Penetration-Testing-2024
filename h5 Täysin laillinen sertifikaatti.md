@@ -450,14 +450,35 @@ Nyt kun yritin päivittää sivua, niin alert ilmestyy:
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/57bfab1e-8380-4ee3-b540-8cea8785f7e5)
 
+# k) Asenna Webgoat 2023.4. (Uusi versio, jossa on eri tehtäviä kuin vanhemmissa. Jos olet jo asentanut sen, ei tarvitse raportoida asennusta uudelleen; raportoi silloin vain pelkkä testi, jolla toteat sen toimivaksi.)
 
+En ehtinyt enempää harjoituksia tehdä kuin PortSwigger harjoitukset. Näiden tekeminen menee vasta deadlinen jälkeen. 
 
+# Lähteet:
 
+Karvinen T. Eettinen hakkerointi 2024, https://terokarvinen.com/2024/eettinen-hakkerointi-2024/
 
+OWASP, A01:2021 – Broken Access Control, https://owasp.org/Top10/A01_2021-Broken_Access_Control/
 
+OWASP, A10:2021 – Server-Side Request Forgery (SSRF) ,https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 
+PortSwigger, Insecure direct object references (IDOR), https://portswigger.net/web-security/access-control/idor
 
+PortSwigger, Path traversal, https://portswigger.net/web-security/file-path-traversal
 
+PortSwigger, Server-side template injection, https://portswigger.net/web-security/server-side-template-injection
+
+PortSwigger, Server-side request forgery (SSRF), https://portswigger.net/web-security/ssrf
+
+PortSwigger, Cross-site scripting, https://portswigger.net/web-security/cross-site-scripting
+
+SalesForce, Setting up ZAP for browser, https://security.my.salesforce-sites.com/security/tools/webapp/zapbrowsersetup
+
+FoxyProxy, URL Patterns, https://help.getfoxyproxy.org/index.php/knowledge-base/url-patterns/
+
+Seven Seas Security, SSTI Complete Lab Breakdown: SSTI w/ info disclosure via user-supplied objects, https://www.youtube.com/watch?v=8o5QPU-BvFQ
+
+HackTricks, SSTI (Server Side Template Injection), https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection
 
 
 
