@@ -157,9 +157,125 @@ Hakupyyntö ilmestyy myös ZAP:iin:
 
 ![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/deb1220c-9239-4d81-9423-f3fa6deb99eb)
 
-**En oikein ymmärtänyt miten ohjesituksessa mainittiin, että localhost ei toimi ilman FoxyProxya. Ehkä tämä selkenee tehtävää edetessäni.**
+### FoxyProxyn, sekä CA-sertifikaatin generointi ja asennus Firefoxiin
 
-### CA-sertifikaatin generointi ja asennus Firefoxiin
+ZAP:in selain ei kuitenkaan tallenna CA sertifikaatteja, eikä lisäosia, joten asennetaan Kalin Firefoxiin kyseiset lisäkonfiguraatiot.
+
+Avasin Firefoxin ja asensin Foxyproxyn: https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/b41ed532-ec2f-4cc5-8232-42ebe7f735ca)
+
+**Remove** napin tilalla on **Add to Firefox**. Minulla sattui olemaan se valmiiksi asennettuna.
+
+Seuraavaksi määritetään FoxyProxyn ottamaan ZAP proxyn tiedot:
+
+Valitaan tästä **Preferences**
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/5a1e4210-a01e-4ef1-962d-c1b9d0693b5a)
+
+Määritetään proxyn tiedot ja valitaan **Save**:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/59f862d9-eb0f-41b6-a3de-759128b64378)
+
+Klikataan **ZAP Proxy** päälle:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3a7beaf7-986d-4a9d-90eb-886162662742)
+
+Nyt kun FoxyProxy on päällä, yritetään avata jotakin sivua:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/3ab4f654-7298-43c0-a4a6-7c329a0add89)
+
+www.google.com ilmoittaa, ettei CA ole luotettu. Korjataan tämä seuraavaksi.
+
+Avataan **ZAP -> Tools -> Options... -> Network -> Server Certificates**
+
+Klikataan **Generate** ja sen jälkeen **Save**. Tallennetaan .cer tiedosto vaikka root kansioon.
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/0206e88b-0ae1-4f83-ab2b-834bb49000ce)
+
+Mennään takaisin Firefoxiin ja navigoidaan **Settings -> Privacy & Security -> Certificates -> View Certificates... -> Import...**
+
+Valitaan meidän generoimaa **zap_root_ca.cer** tiedostoa ja klikataan päälle molemmat checkboxit ja OK
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/a8da7fa5-2dcb-4936-83be-425181452ab4)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/fb9f1254-f2e7-40c3-9de3-36738ec1542d)
+
+Nyt CA:n pitäisi olla luotettu ja kokeillaan www.google.com uudestaan:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d819d210-5083-434b-86c1-58fb9a04bf46)
+
+Nyt sivu toimii ja CA on verifioitu. Hakupyynnöt näkyvät myös ZAP:issa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/c7da7680-4d2c-4442-90b8-a82721f0e512)
+
+localhost hakupyynnöt näkyy myös ZAP:issa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/dda75a6d-43db-4dd2-9288-c3524c8e2fe0)
+
+# b) Kettumaista. Asenna FoxyProxy Standard Firefox Addon, ja lisää ZAP proxyksi siihen. Käytä FoxyProxyn "Patterns" -toimintoa, niin että vain valitsemasi weppisivut ohjataan Proxyyn. (Läksyssä ohjataan varmaankin PortSwigger Labs ja localhost.)
+
+Edellisessä vaiheessa asensin ja konffasin FoxyProxyn. Nyt kytketään "Patterns" toiminto Foxyproxysta sieppaamaan vain PortSwigger ja localhost liikenteen.
+
+FoxyProxysta avasin **Proxies** välilehden ja lisäsin ZAP Proxy:n alle Pattersit localhostille ja portswiggerille:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/cb97f599-1b31-4e0c-8aad-375eb871d647)
+
+
+Nyt kun Patternit tallentaa, kytketään päälle **Proxy by Patterns** vaihtoehtoa:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2328b600-1709-4d6d-818a-870ce4a59071)
+
+Nyt ZAP sieppaa ainoastaan portswigger ja localhost liikenteen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/8de3340e-9cea-4660-981d-10575871b753)
+
+Nyt ollaan valmiita aloittamaan PortSwigger Labratehtävät.
+
+# PortSwigger Labs. Ratkaise tehtävät. Selitä ratkaisusi: mitä palvelimella tapahtuu, mitä eri osat tekevät, miten hyökkäys löytyi, mistä vika johtuu. Kannattaa käyttää ZAPia, vaikka malliratkaisut käyttävät harjoitusten tekijän maksullista ohjelmaa. Malliratkaisun kopioiminen ZAP:n tai selaimeen ei ole vastaus tehtävään, vaan ratkaisu ja haavoittuvuuden etsiminen on selitettävä ja perusteltava.
+
+## c) Insecure Direct Object Reference (IDOR)
+
+Tein ensin uuden Patternin PortSwigger Labran harjoitussivuille, jotta ZAP sieppaa sen liikenteen:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/1bf77f90-3e47-4290-aa2e-6d666f47e525)
+
+Aloitin menemällä login sivulle ja Postasin Username: carlos ja salasana: 123
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/704694f9-b174-4bc0-af2d-b998d2efdd1b)
+
+Salasana oli väärä, joten tarkistelin Zap:ista POST tiedot:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/4e367809-db65-42d1-9211-d1fe5f8856fe)
+
+Hetken mietittyä kokeilin mennä **Live Chat** osioon, joka myös sieppaa keskustelulogit ZAP:iin:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2f1c9979-c75e-451b-bdf1-a6202b43431d)
+
+Huomasin, että transcriptit alkaa tekstitiedostolla 2.txt ja mietin puuttuvaa 1.txt alkavaa tiedostoa.
+
+Avasin keskustelun contentit ZAP:in Requester ikkunaan:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/f1bcc602-935a-41e0-bcd9-5124f6141a24)
+
+Vaihdoin headerista **3.txt** osion lataamaan **1.txt** tilalle ja painoin **Send**
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/0ac1210d-129e-4f76-b437-a2fa146eab51)
+
+Vastaus palautti logitiedosto **1.txt**, jossa näkyy käyttäjän carlos:in salasana:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/890e42ca-fc4a-4544-9fbb-491cd6dd3b83)
+
+
+Syötin **Login** ikkunaan carlosin kirjautumistiedot ja sain Labran ratkottua!
+
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ae3e7e9b-ed0e-4f8e-9cd5-e8f0179c096f)
+
+## 
+
+
+
 
 
 
