@@ -10,7 +10,9 @@ NMAP
 FFUF
 | Syntax | Description |
 | :--- | ---: |
-|  |  |
+| ./ffuf -w common.txt -u http://kohdeURL/FUZZ | -w käyttää common.txt worlistia fuzzaamiseen, -u syötetään fuzzattava URL |
+| ./ffuf -w common.txt -u http://kohdeURL/FUZZ -fc; -fl; -fmode; -fr; -fs; -ft; -fw | Filtterit : c > HTTP stat codes, l > lines, mode > parameters, r > regexp, s > size, t > time, w > wordcount |
+
 
 METASPLOIT FRAMEWORK
 | Syntax | Description |
@@ -36,6 +38,11 @@ MSFVENOM
 JOHN THE RIPPER
 | Syntax | Description |
 | :--- | ---: |
-| asdge.spede asd asdjfj -p | kekistlol |
+| ./john/run/<'module-name'> > 'output-file.hash' | Ajaa run hakemistosta valitun moduulin joka ottaa hash tiedon ja ulostaa sen toiseen tiedostoon |
+| ./john/run/john <'finlename.hash'> | Aloittaa hashin murtamista |
 
-HASHCAT
+HASHCAT / HASHID
+| Syntax | Description |
+| :--- | ---: |
+| hashid -m <'hash'> | Analysoi hashin ja sen mahdollista tyyppiä |
+| hashcat -m <'mode-number'> <'hash'> <'wordlist.txt'> -o <'outputfile'> | -m kertoo hashmoden ja wordlistiin syötetään esim rockyou.txt ja -o ulostaa murretun hashin erilliseen tiedostoon. |
