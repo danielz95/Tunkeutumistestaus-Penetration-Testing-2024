@@ -109,7 +109,19 @@ docker:
 
 # Lähteet
 
-https://www.sciencedirect.com/science/article/pii/S1319157821000203
+Indren D., h3 Ffuf faster, https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/blob/main/h3%20Fuff%20faster.md
+
+Indren D., h2: scanning cyberspace, https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/blob/main/h2%20Scanning%20Cyberspace.md
+
+HackTricks, MSFVenom cheat sheet, https://book.hacktricks.xyz/generic-methodologies-and-resources/shells/msfvenom
+
+
+
+Kaur J. et Ramkumar K.R., 2021, The recent trends in cyber security: A review,  https://www.sciencedirect.com/science/article/pii/S1319157821000203
+
+Julkaisufoorumi, Journal of King Saud University - Computer and Information Sciences, https://jfp.csc.fi/#!PublicationInformationView/id/84096
+
+
 
 
 
