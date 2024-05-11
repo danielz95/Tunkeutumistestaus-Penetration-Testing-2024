@@ -80,6 +80,36 @@ Käytän tässä lipunryöstötehtävässä kurssilla käyttämääni Kali virtu
 
 Varmistin, että minulla ei ollut arkaluonteista dataa konella. Tarkistin, että minulla oli tarvittavat paketit ja työkalut asennettuna lipunryöstöä varten:
 
-Metasploit:
+Metasploit framework:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/438ab12b-e33c-44c8-a7fd-8779dadfac72)
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/d5210beb-6392-46f9-9976-9816c71c3021)
+
+nmap:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/2b968038-21c1-4579-a691-31608a86ee40)
+
+
+ffuf:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/04aaa60b-109f-4e8a-8461-ce44dad5c932)
+
+Jumbo John:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/bd7bfb4c-3fa8-44b3-8feb-2b089a0353af)
+
+Hashcat ja HashID:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/839095a8-442d-459c-98b0-1c2fa9bc963c)
+
+docker:
+
+![image](https://github.com/danielz95/Tunkeutumistestaus-Penetration-Testing-2024/assets/128583292/ded2ac13-c8cf-4b1d-9f90-f840c61283cd)
+
+# Lähteet
+
+https://www.sciencedirect.com/science/article/pii/S1319157821000203
+
 
 
