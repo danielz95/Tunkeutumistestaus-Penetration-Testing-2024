@@ -46,3 +46,40 @@ HASHCAT / HASHID
 | :--- | ---: |
 | hashid -m <'hash'> | Analysoi hashin ja sen mahdollista tyyppiä |
 | hashcat -m <'mode-number'> <'hash'> <'wordlist.txt'> -o <'outputfile'> | -m kertoo hashmoden ja wordlistiin syötetään esim rockyou.txt ja -o ulostaa murretun hashin erilliseen tiedostoon. |
+
+# b) Review. Etsi ja tiivistä vertaisarviotu katsausartikkeli valitsemaltasi kyberturvallisuuden tai hakkeroinnin alalta.
+
+## Artikkelin valinta
+
+Artikkeliksi valitsin Kaur J.:n ja Ramkumar K.R.:n kirjoittaman katsausartikkelin "The recent trends in cyber security: A review" joka on osana "Journal of King Saud University - Computer and Information Sciences" -Lehteä/sarjaa. Lehti on on saanut Julkaisufoorumin arvioinnin tasoa 1. Artikkeli on ollut julkisesti saatavilla 9.2.2021 ja sen virallinen lehtijulkaisuajankohta oli 9/2022.
+
+Julkaisufoorumin arvio:
+https://jfp.csc.fi/#!PublicationInformationView/id/84096
+
+Artikkelia pääsee lukemaan tästä: 
+https://www.sciencedirect.com/science/article/pii/S1319157821000203
+
+Sen saa myös ilmaiseksi ladattuna PDF-muodossa.
+
+## Artikkelin tiivistelmä
+
+
+- Artikkelissa käsitellään nykyajan tietotuvan uusista menetelmistä ja teknologiasta, jolla pyritään tietoturvallisuuden viitekehyksiä. Se toimii ylipäätään teknisenä raporttina nykytutkijoille tietoturvan nykyisisestä tilasta.
+-  Iso-Britannia on esittänyt kansallisen National Security Strategy vuosina 2016-2021 ja satsannut siihen 1.9 miljardia puntaa(£) kansallisen tietoturvansa parantamiseksi.
+-  Vuonna 2018, Lähes 70 valtiota ovat jollakin tasolla dokumentoidusti kehittäneet heidän tietoturvastrategiansa.
+- Artikkelissa käsiteltiin hieman kryptografian historiasta, jossa nykyajan salausmenetelmistä alkoi DES menetelmällä vuonna 1977. Tämä kuitenkin murrettiin vuonna 1999 alle 24 tunnissa brute-force hyökkäyksellä ja todettiin epäluotettavaksi lyhyen kirjainmääränsä vuoksi (56-bit).
+DES menetelmälle kehitettiin EDE-mode (3DES) joka kolminkertaisti pituutensa (168-bit).
+Vuonna 2001 NIST julisti valitsevansa uuden salausmenetelmän AES, jossa oli vaihtelevat pituudet (128, 192, 256 bittiä). AES ei ole tähän päivään asti pystytty murtamaan.
+- Vuonna 1976, Diffie-Hellman menetelmä oli yksiä ensimmäisiä salausmenetelmiä, jossa hyödynnettiin jaetun avaimen salausmenetelmää. Tästä kehitettiin RSA menetelmä vuonna 1978 johon lisättiin julkisen avaimen menetelmää, joka myös yleisesti käytetään nykypäivänä.
+- Nykypäivän RSA ja AES menetelmät halutaan parantaa implementoimalla Quantum cryptography menetelmiä. Quantum-salausmenetelmissä käytetään bittien sijaan Qbitteja, mitkä ovat mahdottomia kopioida, sekä mahdotonta tunnistaa minkälaisen suodattimen kautta sen purkamiseen käytetään. Quantum-tietokoneita ovat vielä kehitteellä, mutta voivat artikkelin mukaan olla käytössä jo vuonna 2025.
+- Artikkelissa puhuttiin Side-Channel hyökkäyksistä (SCA). Näitä hyökkäyksiä salausmenetelmiä vastaan eivät suorannaisesti yritä murtaa salausta, vaan keskittyvät salauksen tekemiseen käytettäviin laitteisiin tai fyysisiin kanaviin. Tietoja voivat olla signaaleja, elektromagneettisia vuotoja, virrankulutustiedot, ajastustiedot ja äänitiedot.
+
+# c) Valmiina lipunryöstöön. Asenna läppärillesi tarvittavat työkalut lipunryöstöön. Hyökkäyskone voi olla virtuaalikone. Se ei saa sisältää luottamuksellisia tietoja, koska sitä voi olla tarpeen tarkistaa ja tutkia harjoituksen yhteydessä. Koneella saatetaan ajaa testibinäärejä ja kontteja; sekä tarkastamiseen liittyviä ohjelmia. Harjoituksessa saattaa olla Docker-kontteja, kokeile, että Docker toimii (Muistaakseni 'sudo apt-get -y install docker.io').
+
+Käytän tässä lipunryöstötehtävässä kurssilla käyttämääni Kali virtuaalikonetta
+
+Varmistin, että minulla ei ollut arkaluonteista dataa konella. Tarkistin, että minulla oli tarvittavat paketit ja työkalut asennettuna lipunryöstöä varten:
+
+Metasploit:
+
+
